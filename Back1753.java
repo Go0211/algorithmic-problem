@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
-class Node {
+class Back1753_Node {
     int to;
     int w;
 
-    public Node(int to, int w) {
+    public Back1753_Node(int to, int w) {
         this.to = to;
         this.w = w;
     }
@@ -25,40 +25,40 @@ public class Back1753 {
         int edge = Integer.parseInt(strArr[1]);
         int start = Integer.parseInt(br.readLine());
 
-        ArrayList<ArrayList<Node>> list = new ArrayList<>();
+        ArrayList<ArrayList<Back1753_Node>> list = new ArrayList<>();
         for (int i = 0; i < node + 1; i++) {
             list.add(new ArrayList<>());
         }
         for (int i = 0; i < edge; i++) {
             strArr = br.readLine().split(" ");
             list.get(Integer.parseInt(strArr[0]))
-                    .add(new Node(Integer.parseInt(strArr[1]), Integer.parseInt(strArr[2])));
+                    .add(new Back1753_Node(Integer.parseInt(strArr[1]), Integer.parseInt(strArr[2])));
         }
 
         dijkstra(list, node, start);
     }
 
-    private static void dijkstra(ArrayList<ArrayList<Node>> list, int node, int start) {
+    private static void dijkstra(ArrayList<ArrayList<Back1753_Node>> list, int node, int start) {
         int[] dist = new int[node + 1];
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[start] = 0;
 
-        PriorityQueue<Node> pq = new PriorityQueue<>((x, y) -> x.w - y.w);
-        pq.add(new Node(start, 0));
+        PriorityQueue<Back1753_Node> pq = new PriorityQueue<>((x, y) -> x.w - y.w);
+        pq.add(new Back1753_Node(start, 0));
 
         while (!pq.isEmpty()) {
-            Node curNode = pq.remove();
+            Back1753_Node curBack1753_Node = pq.remove();
 
-            if (curNode.w > dist[curNode.to]) {
+            if (curBack1753_Node.w > dist[curBack1753_Node.to]) {
                 continue;
             }
 
-            for (int i = 0; i < list.get(curNode.to).size(); i++) {
-                Node preNode = list.get(curNode.to).get(i);
+            for (int i = 0; i < list.get(curBack1753_Node.to).size(); i++) {
+                Back1753_Node preBack1753_Node = list.get(curBack1753_Node.to).get(i);
 
-                if (dist[preNode.to] > curNode.w + preNode.w) {
-                    dist[preNode.to] = curNode.w + preNode.w;
-                    pq.add(new Node(preNode.to, dist[preNode.to]));
+                if (dist[preBack1753_Node.to] > curBack1753_Node.w + preBack1753_Node.w) {
+                    dist[preBack1753_Node.to] = curBack1753_Node.w + preBack1753_Node.w;
+                    pq.add(new Back1753_Node(preBack1753_Node.to, dist[preBack1753_Node.to]));
                 }
             }
         }
